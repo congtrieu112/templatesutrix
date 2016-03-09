@@ -1,0 +1,78 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{% if content %}
+    <div id="services" data-animation data-offset="0"  {{ attributes.addClass('block-services') }}>
+        {{ title_prefix }}
+        {% if label %}
+            <h2{{ title_attributes }}>{{ label }}</h2>
+        {% endif %}
+        {{ title_suffix }}
+        <div class="grid-fluid">
+            <div class="inner-services">
+                <h2 class="title">{{ content["#markup"]["title"] }}</h2>
+                <p>{{ content["#markup"]["info"]|raw }}</p>
+            </div>
+            <div class="block-sutrix-services visible-md-up">
+                <div class="line-bgd">
+                    <div class="item item-line1"></div>
+                    <div class="item item-line2"></div>
+                    <div class="item item-line3"></div>
+                    <div class="item item-line4"></div>
+                </div>
+                {% if content["#markup"]["contents"]["one"] %}
+                    <div class="{{ content["#markup"]["class_icon_one"] }}">
+                        <div class="item item-main"><span class="icon-services icon-main"></span>
+                            <h3 class="item-title">
+                                <a href="{{ content["#markup"]["url_icon_one_link"] }}" title="{{ content["#markup"]["title_icon_one_link"] }}">{{ content["#markup"]["title_icon_one_link"]}}</a>
+                            </h3>
+                        </div>
+                        {% set i=1 %}
+                        {% for item in content["#markup"]["contents"]["one"] %}
+                            <div class="parent-tooltip item item{{ i }}"><a href="javascript:void(0)" data-tooltip-type="" data-toggle="TooltipElement" data-tooltip-content="{{ item["info"]|raw }}"><span class="icon-services {{ item["class"] }}"></span><span class="text">{{ item["title"] }}</span></a></div>
+                        {% set i= i + 1 %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if content["#markup"]["contents"]["two"] %}
+                    <div class="{{ content["#markup"]["class_icon_two"] }}">
+                        <div class="item item-main"><span class="icon-services icon-main"></span>
+                            <h3 class="item-title">
+                                <a href="{{ content["#markup"]["url_icon_two_link"] }}" title="{{ content["#markup"]["title_icon_two_link"] }}">{{ content["#markup"]["title_icon_two_link"] }}</a>
+                            </h3>
+                        </div>
+                        {% set i=1 %}
+                        {% for item in content["#markup"]["contents"]["two"] %}
+                            <div class="parent-tooltip item item{{ i }}"><a href="javascript:void(0)" data-tooltip-type="" data-toggle="TooltipElement" data-tooltip-content="{{ item["info"]|raw }}"><span class="icon-services {{ item["class"] }}"></span><span class="text">{{ item["title"] }}</span></a></div>
+                        {% set i= i + 1 %}
+                        {% endfor %}
+                    </div>
+                {%  endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

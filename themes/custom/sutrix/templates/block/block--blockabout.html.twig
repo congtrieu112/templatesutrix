@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{% if content %}
+    <div id="about" {{ attributes.addClass('about') }}>
+        {{ title_prefix }}
+        {% if label %}
+            <h2{{ title_attributes }}>{{ label }}</h2>
+        {% endif %}
+        {{ title_suffix }}
+        <div class="block-information">
+            <div class="grid-fluid">
+                <h2 class="title hidden-sm-up">
+                    {{  content['#markup']['title'] }}
+                </h2>
+                <div class="content">
+                    <div class="image-box">
+                        <img alt="Sutrix map" src="{{ content['#markup']['image_info'] }}">
+                    </div>
+                    <div class="main-box">
+                        <h2 class="title visible-sm-up">
+                            {{  content['#markup']['title'] }}
+                        </h2>
+                        <div class="content">
+                            {{  content['#markup']['infos']|raw }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block-brand">
+            <div class="item bgd-green consulting-item">
+                <div class="item-inner">
+                    <h3 class="title">{{ content["#markup"]["title_sub_one_about"] }}</h3>
+                    {{ content["#markup"]["info_sub_one_about"]|raw }}
+
+                    <a href="{{ content["#markup"]["link_link_sub_one_about"] }}" title="{{ content["#markup"]["title_link_sub_one_about"] }}" target="_self" class="btn btn-black">
+                        <span>{{ content["#markup"]["title_link_sub_one_about"] }}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="item bgd-orange solution-item">
+                <div class="item-inner">
+                    <h3 class="title">{{ content["#markup"]["title_sub_two_about"] }}</h3>
+                    {{ content["#markup"]["info_sub_two_about"]|raw }}
+
+                    <a href="{{ content["#markup"]["link_link_sub_two_about"] }}" title="{{ content["#markup"]["title_link_sub_two_about"] }}" target="_self" class="btn btn-black">
+                        <span>{{ content["#markup"]["title_link_sub_two_about"] }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

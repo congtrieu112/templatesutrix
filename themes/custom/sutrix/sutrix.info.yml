@@ -1,0 +1,10 @@
+name: sutrix
+type: theme
+description: Sutrix drupal 8
+package: Other
+core: 8.x
+libraries:
+  - sutrix/global-css
+
+base theme: bartik
+

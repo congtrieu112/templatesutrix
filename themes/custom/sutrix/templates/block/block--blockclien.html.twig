@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+
+{% if content %}
+    <div id="clients" class="clients-block">
+        <div class="grid-fluid">
+            <h2 class="title">Clients</h2>
+            <div class="row">
+                <div class="col-sm-12 item-content">
+                    <div class="slider-clients">
+                        <div data-slide data-type="slider-clients" class="item-content">
+                            {% if content["#markup"] %}
+                                {% set i=0 %}
+                                {% set split_number = content["#markup"]|length %}
+                                {% for item in content["#markup"] %}
+                                    {% if i % 6 == 0  %}
+                                        <ul class="list-clients">  
+                                        {% endif %}
+                                        <li>
+                                            <a href="{{ item["link"] }}" title="{{ item["alt"] }}" target="_blank">
+                                                <div class="content"><img src="{{ item["image"] }}" alt="{{ item["alt"] }}"/></div>
+                                            </a>
+                                        </li> 
+                                        {%  if i % 6 == 0 and i!=0 %}
+                                        </ul>
+                                    {% endif %}
+                                    {% set i = i+1 %}       
+                                {% endfor %}
+                                
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

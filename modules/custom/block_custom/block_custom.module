@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains block_custom.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function block_custom_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the block_custom module.
+    case 'help.page.block_custom':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Custom block') . '</p>';
+      return $output;
+
+    default:
+  }
+}

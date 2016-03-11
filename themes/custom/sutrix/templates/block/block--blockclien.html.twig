@@ -27,7 +27,12 @@
 #}
 
 {% if content %}
-    <div id="clients" class="clients-block">
+    <div id="clients" {{ attributes.addClass('clients-block') }}>
+        {{ title_prefix }}
+        {% if label %}
+            <h2{{ title_attributes }}>{{ label }}</h2>
+        {% endif %}
+        {{ title_suffix }}
         <div class="grid-fluid">
             <h2 class="title">Clients</h2>
             <div class="row">
@@ -36,9 +41,10 @@
                         <div data-slide data-type="slider-clients" class="item-content">
                             {% if content["#markup"] %}
                                 {% set i=0 %}
-                                {% set split_number = content["#markup"]|length %}
+                                {% set sum_number = content["#markup"]|length %}
+                                {% set number = 8 %}
                                 {% for item in content["#markup"] %}
-                                    {% if i % 6 == 0  %}
+                                    {% if i % number == 0  %}
                                         <ul class="list-clients">  
                                         {% endif %}
                                         <li>
@@ -46,7 +52,7 @@
                                                 <div class="content"><img src="{{ item["image"] }}" alt="{{ item["alt"] }}"/></div>
                                             </a>
                                         </li> 
-                                        {%  if i % 6 == 0 and i!=0 %}
+                                        {%  if (i+1) % number == 0  %}
                                         </ul>
                                     {% endif %}
                                     {% set i = i+1 %}       

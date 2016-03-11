@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{#{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+{% for row in rows %}
+  {%
+    set row_classes = [
+      default_row_class ? 'views-row',
+'tech-block'
+    ]
+  %}
+  <div{{ row.attributes.addClass(row_classes) }}>
+    {{ row.content }}
+  </div>
+{% endfor %}#}
+
+<div id="technologies" class="tech-block">
+    <div class="grid-fluid">
+        <h2 class="title hidden-sm-up">Expertise</h2>
+        <div class="row">
+            <div class="col-sm-3 item-info visible-sm-up">
+                <h2 class="title visible-sm-up">Expertise</h2>
+                <p class="desc">Sutrix specializes in web and mobile app development. We use industry standard digital technologies and our engineers are certified in Adobe, Sitecore and Agile methodology.</p>
+            </div>
+            <div class="col-sm-9 item-content">
+                <div class="slider-clients">
+                    <div data-slide data-type="slider-clients" class="item-content">
+                        {% set sum_number = rows|length %}
+                                {% set number = 8 %}
+                                 {% set i=0 %}
+                                                   <div{{ row.attributes.addClass(row_classes) }}>
+          
+                        {% for row in rows %}
+                            {%
+                                set row_classes = [
+                                  default_row_class ? 'views-row',
+                            'tech-block'
+                                ]
+                            %}
+                                 {% if i % number == 0  %}
+                                        <ul class="list-techs">  
+                                        {% endif %}
+
+                                    
+                                    {{ row.content }} 
+                                    {%  if (i+1) % number == 0  %}
+                                        </ul>
+                                    {% endif %}
+                                     {% set i = i+1 %}   
+                        {% endfor %}
+                            </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

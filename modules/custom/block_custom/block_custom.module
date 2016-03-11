@@ -4,8 +4,8 @@
  * @file
  * Contains block_custom.module..
  */
-
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_help().
@@ -22,3 +22,93 @@ function block_custom_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+function block_custom_preprocess_views_view_fields(&$variables) {
+  $a = $variables['row'];
+  $b = $a->_entity;
+
+//
+  $field_properties = array_keys($b
+                  ->getFieldDefinition('field_logo_image')
+                  ->getFieldStorageDefinition()
+                  ->getPropertyDefinitions());
+  $abc = 123123;
+  $fid = $b->field_logo_image->target_id;
+  $file = File::load($fid);
+  $banner = $file->getFileUri();
+  $url = file_create_url($banner);
+  $variables['banner'] = $url;
+}
+
+function block_custom_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+  // Remove the contextual links on all blocks that provide them.
+//  $a = "sdfsdf";
+}
+
+function block_custom_form_alter(&$form, $form_state, $form_id) {
+  if($form_id == "contactus"){
+    $form["#theme"] = "contactus";
+    
+    $form['select_location']['#title'] = Null; // Change text on form
+    $form['select_location']['#description'] = Null; // Change text on form
+    
+    $form['name']['#title'] = Null; // Change text on form
+    $form['name']['#description'] = Null; // Change text on form
+    $form['name']['#attributes'] = array('data-rule' => "['required']");
+    
+    $form['token']['#title'] = Null; // Change text on form
+    $form['token']['#description'] = Null; // Change text on form
+    $form['token']['#attributes'] = array('data-rule' => "['required']",'id'=>'security');
+    
+    
+    $form['email']['#title'] = Null; // Change text on form
+    $form['email']['#description'] = Null; // Change text on form
+    $form['email']['#attributes'] = array('data-rule' => "['required']");
+    
+    
+    $form['meseage']['#title'] = Null; // Change text on form
+    $form['meseage']['#description'] = Null; // Change text on form
+    $form['meseage']['#attributes'] = array('data-rule' => "['required']");
+    
+    $form['sent']['#title'] = Null;
+    $form['sent']['#description'] = Null;
+    $form['sent']['#markup'] = '<button type="submit" name="submit" class="send-btn btn btn-color"><span>Send</span></button>';
+
+    
+    $form['sent']['#attributes'] = array('class' => array('send-btn','btn','btn-color'));
+    $form['#validate'][] = 'block_custom_contactus_validate';
+    $form['google'] = "abc";
+  }
+}
+
+//function block_custom_theme($existing, $type, $theme, $path) {
+//  $a = 123;
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function block_custom_form_contactus_alter(&$form, &$form_state) {
+//  $form["#theme"] = "contactus"; 
+
+}
+
+function block_custom_theme($existing, $type, $theme, $path) {
+
+
+  $items['contactus'] = array(
+      'render element' => 'form',
+      'template' => 'contactus',
+      'path' => drupal_get_path('theme', 'sutrix') . '/template/form',
+  );
+  return $items;
+}
+
+
+
+/**
+ * Custom validation function.
+ */
+function block_custom_contactus_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  } 

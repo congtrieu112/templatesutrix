@@ -10,6 +10,9 @@
  * @see template_preprocess_form()
  */
 #}
-<form{{ attributes }}>
+<div class="contact-form left">
+
+<form novalidate name="contactform" data-validation target="upload-iframe" autocomplete="off" enctype="multipart/form-data" id="contact-form"  {{ attributes.addClass('form-1') }}>
   {{ children }}
 </form>
+</div>

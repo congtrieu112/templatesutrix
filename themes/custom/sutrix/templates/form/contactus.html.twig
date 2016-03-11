@@ -1,0 +1,68 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{#<form{{ attributes }}>
+  {{ children }}
+</form>#}
+{% if errors %}
+      <div>
+        {{ errors }}
+      </div>
+    {% endif %}
+{% set tempale_root = "http://sutrix.drupal8.com/themes/custom/sutrix" %}
+ <!-- BEGIN FORM CONTACT -->
+                                <div class="form-group form-select">
+                                    <div class="custom-select" data-select>
+                                        {{ form.select_location }}
+                                        {#<select name="contact_to">
+                                            <option value="hongkong">SUTRIX GROUP - HONGKONG</option>
+                                            <option value="paris">SUTRIX CONSULTING - FRANCE</option>
+                                            <option value="scandinavia">SUTRIX CONSULTING - SCANDINAVIA</option>
+                                            <option value="vietnam">SUTRIX SOLUTIONS - VIETNAM</option>
+                                        </select>#}
+                                        <span class="value-selected"></span>
+                                        <span class="arrow-list"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-placeholder>
+                                    <label>Name<span class="orange">*</span></label>
+                                    {{ form.name }}
+{#                                    <input type="text" name="username" id="username" data-rule='["required"]'/>#}
+                                </div>
+                                <div class="form-group" data-placeholder>
+                                    <label>Email<span class="orange">*</span></label>
+                                    {{ form.email }}
+{#                                    <input type="text" name="email" id="email" data-rule='["required", "invalid"]'/>#}
+                                </div>
+                                <div class="form-group message" data-placeholder>
+                                    <label>Message<span class="orange">*</span></label>
+                                    {{ form.meseage }}
+{#                                    <textarea id="message" name="message" data-rule='["required"]'></textarea>#}
+                                </div>
+                                <div class="form-group capcha">
+                                    <div class="field-capcha">
+                                        <img src="{{ tempale_root }}/images/265811280.png" alt="">
+                                    </div>
+                                    <div class="field-security" data-placeholder>
+                                        <label>Security image<span class="orange">*</span></label>
+                                        {{ form.token }}
+{#                                        <input type="text" name="security" id="security" data-rule='["required"]'/>#}
+                                    </div>
+                                </div>
+                                        {{ form.form_build_id }}
+                                        
+                                            {{ form.form_id }}
+
+{#                                {{ form.sent }}#}
+                                <button type="submit" name="submit" class="send-btn btn btn-color"><span>Send</span></button>
+
+                        <!-- END FORM CONTACT -->

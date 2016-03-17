@@ -32,7 +32,6 @@ function block_custom_preprocess_views_view_fields(&$variables) {
                   ->getFieldDefinition('field_logo_image')
                   ->getFieldStorageDefinition()
                   ->getPropertyDefinitions());
-  $abc = 123123;
   $fid = $b->field_logo_image->target_id;
   $file = File::load($fid);
   $banner = $file->getFileUri();
@@ -76,14 +75,21 @@ function block_custom_form_alter(&$form, $form_state, $form_id) {
 
     
     $form['sent']['#attributes'] = array('class' => array('send-btn','btn','btn-color'));
-    $form['#validate'][] = 'block_custom_contactus_validate';
-    $form['google'] = "abc";
+//    $form['#validate'][] = 'block_custom_contactus_validate';
   }
+  if (isset($_SESSION['seccess_export'])) {
+        unset($_SESSION['seccess_export']);
+        dowload_file();
+    }
+      
+
+
 }
 
-//function block_custom_theme($existing, $type, $theme, $path) {
-//  $a = 123;
-//}
+
+
+
+
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -110,5 +116,4 @@ function block_custom_theme($existing, $type, $theme, $path) {
  * Custom validation function.
  */
 function block_custom_contactus_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-
   } 

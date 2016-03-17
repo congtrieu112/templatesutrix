@@ -1,0 +1,8 @@
+
+block_custom.batch_custom:
+  title: 'Batch custom'
+  route_name: block_custom.batch_custom
+  description: 'batch custom'
+  parent: system.admin_config_system
+  weight: 99
+

@@ -15,3 +15,52 @@ block_custom.function_twig_hello:
     _title: 'custom funciton twig'
   requirements:
     _permission: 'access content'
+
+block_custom.create_user_custom:
+  path: '/block_custom/createusercustom'
+  defaults:
+    _form: '\Drupal\block_custom\Form\CreateUserCustom'
+    _title: 'CreateUserCustom'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: FALSE
+
+block_custom.profile_setting:
+  path: '/block_custom/profilesetting'
+  defaults:
+    _form: '\Drupal\block_custom\Form\ProfileSetting'
+    _title: 'ProfileSetting'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: FALSE
+
+
+block_custom.update_profile:
+  path: '/block_custom/updateprofile'
+  defaults:
+    _form: '\Drupal\block_custom\Form\UpdateProfile'
+    _title: 'UpdateProfile'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: FALSE
+block_custom.batch_custom:
+  path: '/admin/config/block_custom/batchcustom'
+  defaults:
+    _form: '\Drupal\block_custom\Form\BatchCustom'
+    _title: 'BatchCustom'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+disc.batch:
+  path: '/disc-batch'
+  defaults:
+    _controller: '\Drupal\block_custom\Controller\DiscBatchController::content'
+    _title: 'Disc Batch'
+  requirements:
+    _permission: 'administer content'
+

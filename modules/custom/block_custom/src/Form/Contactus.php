@@ -71,22 +71,29 @@ class Contactus extends FormBase {
     return  $form;
   
   }
-  
-  /**
+   /**
    * {@inheritdoc}
    */
+  
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $a = 234;
-     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setPropertyConstraints('value', array('Length' => array('max' => 32)));
+  if (strlen($form_state->getValue('name')) < 3) {
+    $form_state->setErrorByName('name', $this->t('The phone number is too short. Please enter a full phone number.'));
   }
+  $ba= 123;
+}
+  
+ 
+
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     
+    $a = 212;
+    
+        drupal_set_message($this->t('Your phone number is @number', array('@number' => $form_state->getValue('name'))));
+
   }
 
 }

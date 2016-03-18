@@ -77,8 +77,8 @@ function block_custom_form_alter(&$form, $form_state, $form_id) {
     $form['sent']['#attributes'] = array('class' => array('send-btn','btn','btn-color'));
 //    $form['#validate'][] = 'block_custom_contactus_validate';
   }
-  if (isset($_SESSION['seccess_export'])) {
-        unset($_SESSION['seccess_export']);
+  if (isset($_SESSION['seccess_export'])&& $_SESSION['seccess_export']) {
+
         dowload_file();
     }
       
@@ -87,7 +87,14 @@ function block_custom_form_alter(&$form, $form_state, $form_id) {
 }
 
 
-
+function dowload_file() {
+    global $base_url;
+    $name = end(explode('/',$_SESSION['linkfile']));
+    $url = $base_url.'/sites/default/files/export/'.$name;
+    unset($_SESSION['seccess_export']);
+    unset($_SESSION['linkfile']);
+    echo '<script type="text/javascript">   setTimeout(function() { window.location.href = "' . $url . '"; }, 2000); </script>';
+}
 
 
 
@@ -116,4 +123,4 @@ function block_custom_theme($existing, $type, $theme, $path) {
  * Custom validation function.
  */
 function block_custom_contactus_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-  } 
+  }
